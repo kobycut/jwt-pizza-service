@@ -18,7 +18,8 @@ test('create franchise', async () => {
     const adminUser = await createAdminUser();
     const loginRes = await request(app).put('/api/auth').send(adminUser);
     const authToken = loginRes.body.token;
-    const createFranchiseRes = await request(app).post('/api/franchise').set('Authorization', `Bearer ${authToken}`).send({ name: "franchise", admins: [{ email: testUser.email }] });
+    const randomFranchiseName = randomName();
+    const createFranchiseRes = await request(app).post('/api/franchise').set('Authorization', `Bearer ${authToken}`).send({ name: randomFranchiseName, admins: [{ email: testUser.email }] });
     expect(createFranchiseRes.status).toBe(200);
 });
 
