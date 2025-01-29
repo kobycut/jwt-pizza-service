@@ -20,7 +20,7 @@ beforeAll(async () => {
 
 test('create order', async () => {
         const order = { franchiseId: 1, storeId: 1, items: [{ menuId: 1, description: 'Veggie', price: 0.05 }] };
-        createdOrderRes = await request(app).post('/api/order').set('Authorization', `Bearer ${authToken}`).send(order);
+        const createdOrderRes = await request(app).post('/api/order').set('Authorization', `Bearer ${authToken}`).send(order);
         expect(createdOrderRes.status).toBe(200);
 })
 
