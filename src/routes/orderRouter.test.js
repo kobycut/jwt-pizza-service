@@ -26,7 +26,7 @@ beforeAll(async () => {
 });
 
 test('create order', async() => {
-    const createdOrderRes = await request(app).post('/api/order').set('Authorization', `Bearer ${testUserAuthToken}`).send({ franchiseId: franchiseID, storeId: storeID, items: [{ "menuId": 1, "description": "Veggie", "price": 0.05 }]});
+    const createdOrderRes = await request(app).post('/api/order').set('Authorization', `Bearer ${authToken}`).send({ franchiseId: franchiseID, storeId: storeID, items: [{ "menuId": 1, "description": "Veggie", "price": 0.05 }]});
     expect(createdOrderRes.status).toBe(200);
 })
 
