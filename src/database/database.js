@@ -167,15 +167,16 @@ class DB {
         }
         admin.id = adminUser[0].id;
         admin.name = adminUser[0].name;
+        console.log(admin)
       }
-
+      console.log(franchise.name);
       const franchiseResult = await this.query(connection, `INSERT INTO franchise (name) VALUES (?)`, [franchise.name]);
       franchise.id = franchiseResult.insertId;
 
       for (const admin of franchise.admins) {
         await this.query(connection, `INSERT INTO userRole (userId, role, objectId) VALUES (?, ?, ?)`, [admin.id, Role.Franchisee, franchise.id]);
       }
-
+      console.log('got this far');
       return franchise;
     } finally {
       connection.end();
