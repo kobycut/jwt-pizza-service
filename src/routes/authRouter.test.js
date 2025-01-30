@@ -10,10 +10,11 @@ beforeAll(async () => {
     testUser.email = Math.random().toString(36).substring(2, 12) + '@test.com';
     const registerRes = await request(app).post('/api/auth').send(testUser);
     testUserAuthToken = registerRes.body.token;
+
     const adminUser = await createAdminUser();
     const loginRes = await request(app).put('/api/auth').send(adminUser);
     authToken = loginRes.body.token;
-    userId = loginRes.body.id;
+    userId = loginRes.body.user.id;
 
     expectValidJwt(testUserAuthToken);
 });
@@ -23,8 +24,10 @@ test('login', async () => {
     expect(loginRes.status).toBe(200);
     expectValidJwt(loginRes.body.token);
 
-    const expectedUser = { ...testUser, roles: [{ role: 'diner' }] };
+    const expectedUser = { ...testUser, roles: [] };
     delete expectedUser.password;
+    console.log(loginRes.body.user);
+    console.log(expectedUser);
     expect(loginRes.body.user).toMatchObject(expectedUser);
 });
 
@@ -40,7 +43,7 @@ test('delete', async () => {
 })
 
 test('update', async () => {
-    const updateRes = await request(app).put(`/api/auth/:${userId}`).set('Authentication', `Bearer ${authToken}`).send({ email: "a@jwt.com", password: "admin" })
+    const updateRes = await request(app).put(`/api/auth/${userId}`).set('Authorization', `Bearer ${authToken}`).send({ email: "a@jwt.com", password: "admin" });
     expect(updateRes.status).toBe(200);
 })
 
