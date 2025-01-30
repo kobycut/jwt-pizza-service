@@ -56,6 +56,23 @@ test('delete one store', async () => {
 
 })
 
+test('cannot delete store', async () => {
+    const deleteStoreRes = await request(app).delete(`/api/franchise/:${franchiseID}/store/:${storeID}`).set('Authorization', `Bearer ${testUserAuthToken}`);
+    expect(deleteStoreRes.status).toBe(403);
+})
+
+test('cannot delete chain',  async () => {
+    const deleteFranchiseRes = await request(app).delete(`/api/franchise/:${franchiseID}`).set('Authorization', `Bearer ${testUserAuthToken}`);
+    expect(deleteFranchiseRes.status).toBe(403);
+})
+
+test('cannot create franchise chain', async () => {
+    const randomFranchiseName = randomName();
+    const createFranchiseRes = await request(app).post('/api/franchise').set('Authorization', `Bearer ${testUserAuthToken}`).send({ name: randomFranchiseName, admins: [{ email: testUser.email }] });
+    expect(createFranchiseRes.status).toBe(403);
+});
+
+
 async function createAdminUser() {
     let user = { password: 'toomanysecrets', roles: [{ role: Role.Admin }] };
     user.name = randomName();
