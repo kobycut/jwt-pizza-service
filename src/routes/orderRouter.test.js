@@ -32,10 +32,10 @@ test('get users orders', async () => {
     expect(getUsersOrderRes.status).toBe(200);
 })
 
-// test('add menu item', async () => {
-//     const addItemRes = await request(app).put('/api/order/menu').set('Authorization', `Bearer ${authToken}`).send({ title: "Student", description: "No topping, no sauce, just carbs", image: "pizza9.png", price: 0.0001 });
-//     expect(addItemRes.status).toBe(200);
-// })
+test('add menu item', async () => {
+    const addItemRes = await request(app).put('/api/order/menu').set('Authorization', `Bearer ${authToken}`).send({ title: "Student", description: "No topping, no sauce, just carbs", image: "pizza9.png", price: 0.0001 });
+    expect(addItemRes.status).toBe(200);
+})
 
 
 function expectValidJwt(potentialJwt) {
