@@ -24,7 +24,7 @@ test('login', async () => {
     expect(loginRes.status).toBe(200);
     expectValidJwt(loginRes.body.token);
 
-    const expectedUser = { ...testUser, roles: [] };
+    const expectedUser = { ...testUser, roles: [{ role: 'diner' }] };
     delete expectedUser.password;
     console.log(loginRes.body.user);
     console.log(expectedUser);
