@@ -80,3 +80,8 @@ jobs:
           git add .
           git commit -m "generated"
           git push
+
+      - name: Run tests
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:coverage
