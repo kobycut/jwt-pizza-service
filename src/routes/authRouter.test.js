@@ -27,6 +27,7 @@ test('login', async () => {
     const expectedUser = { ...testUser, roles: [{ role: 'diner' }] };
     delete expectedUser.password;
     console.log(loginRes.body.user);
+    
     console.log(expectedUser);
     console.log(expectedUser.name);
     expect(loginRes.body.user.name).toMatchObject(expectedUser.name);
