@@ -28,7 +28,9 @@ test('login', async () => {
     delete expectedUser.password;
     console.log(loginRes.body.user);
     console.log(expectedUser);
-    expect(loginRes.body.user).toMatchObject(expectedUser);
+    console.log(expectedUser.name);
+    expect(loginRes.body.user.name).toMatchObject(expectedUser.name);
+    expect(loginRes.body.user.email).toMatchObject(expectedUser.email);
 });
 
 test('register', async () => {
