@@ -17,7 +17,6 @@ franchiseRouter.endpoints = [
     method: 'GET',
     path: '/api/franchise/:userId',
     requiresAuth: true,
-    
     description: `List a user's franchises`,
     example: `curl localhost:3000/api/franchise/4  -H 'Authorization: Bearer tttttt'`,
     response: [{ id: 2, name: 'pizzaPocket', admins: [{ id: 4, name: 'pizza franchisee', email: 'f@jwt.com' }], stores: [{ id: 4, name: 'SLC', totalRevenue: 0 }] }],
