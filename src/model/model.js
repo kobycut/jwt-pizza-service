@@ -3,5 +3,4 @@ const Role = {
   Franchisee: 'franchisee',
   Admin: 'admin',
 };
-
 module.exports = { Role };
