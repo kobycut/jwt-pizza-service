@@ -5,3 +5,4 @@ config.js
 coverage
 dist
 config.js
+secret_keys.txt
