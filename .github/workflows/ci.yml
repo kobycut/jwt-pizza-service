@@ -15,6 +15,7 @@ jobs:
     services:
       mysql:
         image: mysql:8.0.29
+        
         env:
           MYSQL_ROOT_PASSWORD: tempdbpassword
           MYSQL_DATABASE: pizza
