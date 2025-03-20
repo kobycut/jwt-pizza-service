@@ -30,11 +30,9 @@ function trackPrice(price) {
   console.log(price);
   priceValues.push(price);
   const priceValue = "priceValue";
-  sendMetricToGrafana(
-    "price",
-    priceValues[priceValues.length - 1],
-    { priceValue }
-  );
+  sendMetricToGrafana("price", priceValues[priceValues.length - 1], {
+    priceValue,
+  });
 }
 
 function trackRequestLatency(latency) {
@@ -139,7 +137,7 @@ function sendMetricToGrafana(metricName, metricValue, attributes) {
       }
     );
   });
-
+  console.error(config.metrics);
   fetch(`${config.metrics.url}`, {
     method: "POST",
     body: JSON.stringify(metric),
@@ -151,7 +149,6 @@ function sendMetricToGrafana(metricName, metricValue, attributes) {
     .then((response) => {
       if (!response.ok) {
         console.error("Failed to push metrics data to Grafana");
-        console.error(response);
       } else {
         console.log(`Pushed ${metricName}`);
       }
