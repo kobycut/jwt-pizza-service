@@ -137,7 +137,7 @@ function sendMetricToGrafana(metricName, metricValue, attributes) {
       }
     );
   });
-  console.error(config.metrics);
+  console.table(config.metrics);
   fetch(`${config.metrics.url}`, {
     method: "POST",
     body: JSON.stringify(metric),
