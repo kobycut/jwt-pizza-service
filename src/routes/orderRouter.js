@@ -7,6 +7,8 @@ const { asyncHandler, StatusCodeError } = require("../endpointHelper.js");
 const metrics = require("../metrics.js");
 const orderRouter = express.Router();
 // orderRouter.use(metrics.requestTracker);
+const Logger = require('pizza-logger');
+const logger = new Logger(config);
 
 orderRouter.endpoints = [
   {
@@ -133,6 +135,8 @@ orderRouter.post(
     let latencyEnd;
     const orderReq = req.body;
     const order = await DB.addDinerOrder(req.user, orderReq);
+    const orderInfo = { diner: { id: req.user.id, name: req.user.name, email: req.user.email }, order };
+    logger.factoryLogger(orderInfo);
     let price = 0;
     order.items.forEach((item) => {
       price += item.price;

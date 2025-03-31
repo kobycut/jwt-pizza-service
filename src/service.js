@@ -5,8 +5,13 @@ const franchiseRouter = require("./routes/franchiseRouter.js");
 const version = require("./version.json");
 const config = require("./config.js");
 
+const Logger = require("pizza-logger");
+const logger = new Logger(config);
+
 const app = express();
 const metrics = require("./metrics.js");
+const { httpLogger } = require("./logger.js");
+app.use(logger.httpLogger);
 
 app.use(express.json());
 app.use(setAuthUser);
@@ -37,6 +42,7 @@ apiRouter.use("/docs", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  
   res.json({
     message: "welcome to JWT Pizza",
     version: version.version,

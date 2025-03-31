@@ -27,7 +27,7 @@ function trackPizzaLatency(latency) {
 }
 
 function trackPrice(price) {
-  console.log(price);
+  
   priceValues.push(price);
   const priceValue = "priceValue";
   sendMetricToGrafana("price", priceValues[priceValues.length - 1], {
@@ -137,7 +137,7 @@ function sendMetricToGrafana(metricName, metricValue, attributes) {
       }
     );
   });
-  console.table(config.metrics);
+  // console.table(config.metrics);
   fetch(`${config.metrics.url}`, {
     method: "POST",
     body: JSON.stringify(metric),
