@@ -7,7 +7,7 @@ const { asyncHandler, StatusCodeError } = require("../endpointHelper.js");
 const metrics = require("../metrics.js");
 const orderRouter = express.Router();
 // orderRouter.use(metrics.requestTracker);
-const Logger = require('pizza-logger');
+const Logger = require('../logger.js');
 const logger = new Logger(config);
 
 orderRouter.endpoints = [
